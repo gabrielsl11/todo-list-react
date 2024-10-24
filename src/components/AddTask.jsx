@@ -1,6 +1,5 @@
 function AddTask() {
-    return;
-  }
-  
-  export default AddTask;
-  
+  return;
+}
+
+export default AddTask;
