@@ -1,41 +1,14 @@
 import AddTask from "./components/AddTask";
 import Tasks from "./components/Tasks";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  let [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Studying React",
-      description: "Studying React.",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "Studying Vite",
-      description: "Studying Vite.",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "Studying Tailwind CSS",
-      description: "Studying Tailwind CSS.",
-      isCompleted: false,
-    },
-    {
-      id: 4,
-      title: "Studying XML",
-      description: "Studying XML.",
-      isCompleted: false,
-    },
-    {
-      id: 5,
-      title: "Studying English",
-      description: "Studying English.",
-      isCompleted: false,
-    },
-  ]);
+  let [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   function onTaskClick(taskId) {
     let newTasks = tasks.map((task) => {

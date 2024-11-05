@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 function Tasks(props) {
   let navigate = useNavigate();
 
-  function onDetailsClick() {
-    navigate(`/task?title=${task.title}&description=${task.description}`)
+  function onDetailsClick(task) {
+    let query = new URLSearchParams()
+    query.set("title", task.title)
+    query.set("description", task.description)
+    navigate(`/task?${query.toString()}`)
   }
 
   return (
@@ -20,7 +23,7 @@ function Tasks(props) {
           </button>
 
           <button onClick={() => onDetailsClick(task)} className="bg-slate-400 text-white p-2 rounded-md">
-            <Pencil />cccc
+            <Pencil />
           </button>
 
           <button onClick={() => props.onDeleteClick(task.id)} className="bg-slate-400 text-white p-2 rounded-md">
