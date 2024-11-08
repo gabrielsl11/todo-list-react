@@ -30,15 +30,28 @@ function App() {
     }
   ])
 
-  return (
-    <div className='w-screen h-screen flex flex-col items-center mt-6 gap-4'>
-      <h1 className='font-bold text-4xl text-slate-100'>TODO LIST</h1>
+  function onTaskClick(taskId) {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === taskId) {
+          return {
+            ...task,
+            isCompleted: !task.isCompleted
+          }
+        } else { return task }
+      })
+    )
+  }
 
-      <AddTask />
+return (
+  <div className='w-screen h-screen flex flex-col items-center mt-6 gap-4'>
+    <h1 className='font-bold text-4xl text-slate-100'>TODO LIST</h1>
 
-      <Tasks tasks={tasks} />
-    </div>
-  )
+    <AddTask />
+
+    <Tasks tasks={tasks} onTaskClick={onTaskClick} />
+  </div>
+)
 }
 
 export default App
