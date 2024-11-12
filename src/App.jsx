@@ -43,15 +43,37 @@ function App() {
     )
   }
 
-return (
-  <div className='w-screen h-screen flex flex-col items-center mt-6 gap-4'>
-    <h1 className='font-bold text-4xl text-slate-100'>TODO LIST</h1>
+  function onDeleteClick(taskId) {
+    setTasks(tasks.filter((task) => task.id !== taskId))
+  }
 
-    <AddTask />
+  function onAddSubmit(title, description) {
+    setTasks([
+      ...tasks,
+      {
+        id: tasks.length + 1,
+        title, // Short syntax
+        description, // Short syntax
+        isCompleted: false
+      }
+    ])
+  }
 
-    <Tasks tasks={tasks} onTaskClick={onTaskClick} />
-  </div>
-)
+  return (
+    <div className='w-screen h-screen flex flex-col items-center mt-6 gap-4'>
+      <h1 className='font-bold text-4xl text-slate-100'>TODO LIST</h1>
+
+      <AddTask
+        onAddSubmit={onAddSubmit}
+      />
+
+      <Tasks
+        tasks={tasks}
+        onTaskClick={onTaskClick}
+        onDeleteClick={onDeleteClick}
+      />
+    </div>
+  )
 }
 
 export default App
