@@ -1,34 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AddTask from './components/AddTask'
 import Tasks from './components/Tasks'
 
 function App() {
-  let [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: 'Study React',
-      description: 'Studying React to learn how to use it.',
-      isCompleted: false
-    },
-    {
-      id: 2,
-      title: 'Study CSS',
-      description: 'Studying CSS to learn how to use it.',
-      isCompleted: false
-    },
-    {
-      id: 3,
-      title: 'Study JavaScript',
-      description: 'Studying JavaScript to learn how to use it.',
-      isCompleted: false
-    },
-    {
-      id: 4,
-      title: 'Study HTML',
-      description: 'Studying HTML to learn how to use it.',
-      isCompleted: false
-    }
-  ])
+  let [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || [])
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   function onTaskClick(taskId) {
     setTasks(
